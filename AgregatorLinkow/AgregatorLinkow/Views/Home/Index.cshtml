@@ -1,4 +1,6 @@
-﻿@{
+﻿@model AgregatorLinkow.Helpers.LinkList<AgregatorLinkow.LinkListItem>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +8,36 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<table class="table">
+    <tbody>
+        @foreach(var listItem in Model)
+        {
+            <tr>
+                <td style="width:10%">
+                    <div class="counter">
+                        <b>@Html.DisplayFor(item => listItem.PlusesNumber)</b>
+                    </div>
+                    
+                </td>
+                <td style="width:90%">
+                    <div class="tittle">
+                        <b>@Html.DisplayFor(item => listItem.Title)</b>
+                    </div>
+                    <div class="link">
+                        (@Html.DisplayFor(item => listItem.Url))
+                    </div>
+                </td>
+                <td style="width:10%">
+                    @if (listItem.PlusVisibility)
+                    {
+                        <div class="text-center align-middle">
+                            <a icon="" asp-area="" asp-controller="Home" asp-action="Plus" asp-route-linkId="@listItem.LinkId">
+                                <img src="~/plus.png" asp-append-version="true">
+                            </a>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
