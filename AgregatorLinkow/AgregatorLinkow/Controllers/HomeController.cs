@@ -28,7 +28,7 @@ namespace AgregatorLinkow.Controllers
         {
             var links = await this._context.Links.ToListAsync();
             var actualLinks = links.Where(x => (DateTime.Now - x.Date) < TimeSpan.FromDays(5))
-                .OrderByDescending(x => x.PlusesNumber); 
+                .OrderByDescending(x => x.PlusesNumber);
             var currentUser = await this._context.Users.Include(x => x.Links).Include(x => x.Pluses)
                     .FirstOrDefaultAsync(x => x.UserName == HttpContext.User.Identity.Name);
 
@@ -46,12 +46,12 @@ namespace AgregatorLinkow.Controllers
         public async Task<IActionResult> Plus(int linkId)
         {
             var link = await this._context.Links.FirstOrDefaultAsync(x => x.Id == linkId);
-            
-            if(link != null)
+
+            if (link != null)
             {
                 var currentUser = await this._context.Users.Include(x => x.Links).Include(x => x.Pluses)
                 .FirstOrDefaultAsync(x => x.UserName == HttpContext.User.Identity.Name);
-                if(currentUser != null)
+                if (currentUser != null)
                 {
                     this._context.Pluses.Add(new Plus
                     {
@@ -63,17 +63,6 @@ namespace AgregatorLinkow.Controllers
                 }
             }
             return RedirectToAction("Index");
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
