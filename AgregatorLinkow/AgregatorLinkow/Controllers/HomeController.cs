@@ -27,7 +27,7 @@ namespace AgregatorLinkow.Controllers
 
         [Route("")]
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber)
         {
             var links = await this._context.Links.ToListAsync();
             var actualLinks = links.Where(x => (DateTime.Now - x.Date) < TimeSpan.FromDays(5))
@@ -41,7 +41,7 @@ namespace AgregatorLinkow.Controllers
                 listItems.Add(new LinkListItem(currentUser, link));
             }
 
-            return View(new LinkList<LinkListItem>(listItems));
+            return View(new LinkList<LinkListItem>(listItems, pageNumber, 100));
         }
 
         [Authorize]

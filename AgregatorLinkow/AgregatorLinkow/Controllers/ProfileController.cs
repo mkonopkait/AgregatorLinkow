@@ -21,7 +21,7 @@ namespace AgregatorLinkow.Controllers
         }
 
         [Route("Profile/Index")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber)
         {
             var links = await this._context.Links.ToListAsync();
             var currentUser = await this._context.Users
@@ -35,7 +35,7 @@ namespace AgregatorLinkow.Controllers
                 listItems.Add(new LinkListItem(currentUser, link));
             }
 
-            return View(new LinkList<LinkListItem>(listItems));
+            return View(new LinkList<LinkListItem>(listItems, pageNumber, 100));
         }
 
         [Authorize]

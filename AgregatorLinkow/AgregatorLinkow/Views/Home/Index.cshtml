@@ -1,8 +1,26 @@
-﻿@model AgregatorLinkow.Helpers.LinkList<AgregatorLinkow.LinkListItem>
+﻿@using Microsoft.AspNetCore.Http
+@model AgregatorLinkow.Helpers.LinkList<AgregatorLinkow.LinkListItem>
 
 @{
     ViewData["Title"] = "Home Page";
 }
+
+@{
+    var previousAvailable = !Model.HasPrevious ? "disabled" : "";
+    var nextAvailable = !Model.HasNext ? "disabled" : "";
+}
+<div class="text-right">
+    <a  asp-action="Index"
+       asp-route-pageNumber="@(Model.CurrentPage - 1)"
+       class="btn btn-primary text-left @previousAvailable">
+        Previous
+    </a>
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.CurrentPage + 1)"
+       class="btn btn-primary text-left @nextAvailable">
+        Next
+    </a>
+</div>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -10,21 +28,21 @@
 </div>
 <table class="table">
     <tbody>
-        @foreach(var listItem in Model)
+        @foreach (var listItem in Model)
         {
             <tr>
                 <td style="width:10%">
                     <div class="counter">
                         <b>@Html.DisplayFor(item => listItem.PlusesNumber)</b>
                     </div>
-                    
+
                 </td>
                 <td style="width:90%">
                     <div class="tittle">
                         <b>@Html.DisplayFor(item => listItem.Title)</b>
                     </div>
                     <div class="link">
-                        @Html.DisplayFor(item => listItem.Date) <a href="@listItem.Url">(@Html.DisplayFor(item => listItem.Url))</a> 
+                        @Html.DisplayFor(item => listItem.Date) <a href="@listItem.Url">(@Html.DisplayFor(item => listItem.Url))</a>
                     </div>
                 </td>
                 <td style="width:10%">
