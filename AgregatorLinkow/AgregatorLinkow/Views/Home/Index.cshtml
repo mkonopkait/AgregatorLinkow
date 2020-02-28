@@ -12,20 +12,18 @@
 <div class="text-right">
     <a  asp-action="Index"
        asp-route-pageNumber="@(Model.CurrentPage - 1)"
-       class="btn btn-primary text-left @previousAvailable">
+       class="btn btn-primary text-left @previousAvailable"
+       style="margin-bottom:10px">
         Previous
     </a>
     <a asp-action="Index"
        asp-route-pageNumber="@(Model.CurrentPage + 1)"
-       class="btn btn-primary text-left @nextAvailable">
+       class="btn btn-primary text-left @nextAvailable"
+       style="margin-bottom:10px">
         Next
     </a>
 </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
 <table class="table">
     <tbody>
         @foreach (var listItem in Model)

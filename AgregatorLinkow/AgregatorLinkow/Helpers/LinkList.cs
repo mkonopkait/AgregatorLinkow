@@ -19,7 +19,7 @@ namespace AgregatorLinkow.Helpers
             {
                 var size = count / pageSize;
                 this.PagesNumber = count % pageSize == 0 ? size : size + 1;
-                var pagedItems = source.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                var pagedItems = source.Skip(currentPage * pageSize).Take(pageSize).ToList();
                 this.AddRange(pagedItems);
             }
             
@@ -29,7 +29,7 @@ namespace AgregatorLinkow.Helpers
         {
             get
             {
-                return (CurrentPage > 1);
+                return (CurrentPage > 0);
             }
         }
 
@@ -37,7 +37,7 @@ namespace AgregatorLinkow.Helpers
         {
             get
             {
-                return (CurrentPage < PagesNumber);
+                return (CurrentPage < PagesNumber - 1);
             }
         }
     }

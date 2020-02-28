@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using AgregatorLinkow.Models;
 using AgregatorLinkow.Data;
 using Microsoft.EntityFrameworkCore;
@@ -16,13 +15,11 @@ namespace AgregatorLinkow.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly UserManager<User> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public HomeController(ApplicationDbContext context, UserManager<User> userManager)
+        public HomeController(ApplicationDbContext context)
         {
             this._context = context;
-            this._userManager = userManager;
         }
 
         [Route("")]
