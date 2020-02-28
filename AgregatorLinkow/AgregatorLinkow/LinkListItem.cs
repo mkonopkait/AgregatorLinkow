@@ -30,7 +30,14 @@ namespace AgregatorLinkow
             Title = link.Title;
             PlusesNumber = link.PlusesNumber;
             Date = link.Date;
-            this.PlusVisibility = true;
+            if(user != null && user.Id != link.UserId && !user.Pluses.Exists(x => x.LinkId == this.LinkId))
+            {
+                this.PlusVisibility = true;
+            }
+            else
+            {
+                this.PlusVisibility = false;
+            }
         }
     }
 }

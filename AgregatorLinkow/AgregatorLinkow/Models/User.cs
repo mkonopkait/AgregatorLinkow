@@ -17,7 +17,7 @@ namespace AgregatorLinkow.Models
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public User(string email)
+        public User(string email) : this()
         {
             this.UserName = email;
             this.Email = email;

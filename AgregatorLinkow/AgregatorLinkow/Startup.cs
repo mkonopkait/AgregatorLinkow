@@ -32,7 +32,7 @@ namespace AgregatorLinkow
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("LinkAggregator")));
-            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -41,6 +41,7 @@ namespace AgregatorLinkow
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -54,20 +55,12 @@ namespace AgregatorLinkow
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseMvc();
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });
+            app.UseMvc();
         }
     }
 }

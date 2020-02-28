@@ -24,7 +24,7 @@
                         <b>@Html.DisplayFor(item => listItem.Title)</b>
                     </div>
                     <div class="link">
-                        (@Html.DisplayFor(item => listItem.Url))
+                        @Html.DisplayFor(item => listItem.Date) <a href="@listItem.Url">(@Html.DisplayFor(item => listItem.Url))</a> 
                     </div>
                 </td>
                 <td style="width:10%">
